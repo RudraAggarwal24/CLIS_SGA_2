@@ -1,0 +1,218 @@
+﻿Question 4: Log Monitoring Using Pipes and Redirection
+
+
+Aim
+
+
+The objective of this shell script is to continuously monitor a log file, display newly added log entries in real time, extract ERROR messages, maintain a separate error report file, and suppress unnecessary output using Linux pipes and redirection.
+
+
+--------------------------------------------------------------------------------
+
+
+Problem Statement
+
+
+A system administrator needs a monitoring tool that continuously analyzes a log file. The tool should display newly added log entries, extract only ERROR messages, save them into a separate report file, and suppress unnecessary output to improve efficiency.
+
+
+--------------------------------------------------------------------------------
+
+
+Command Executed
+
+
+cd /Users/rudra/Downloads/BITS_CLI_SGA2/Q4_Log_Monitoring && chmod +x *.sh && ./extract_errors.sh && echo "----REPORT----" && cat error_report.txt
+
+
+Explanation
+
+
+The command changes the working directory to the project folder, grants execute permission to all shell scripts, runs the log monitoring script, and finally displays the generated error report containing all extracted ERROR messages.
+
+
+--------------------------------------------------------------------------------
+
+
+Output Observed
+
+
+• The script successfully monitored the application log file.
+• Newly added log entries were processed.
+• Three ERROR messages were extracted from the log file.
+• An error report named error_report.txt was generated.
+• Informational log messages were suppressed by redirecting them to /dev/null.
+• The generated report displayed only the required ERROR entries.
+
+
+--------------------------------------------------------------------------------
+
+
+Linux Commands Used
+
+
+1. cd
+
+
+Purpose:
+Changes the current working directory.
+
+
+Justification:
+Used to navigate to the project folder before executing the shell script.
+
+
+--------------------------------------------------------------------------------
+
+
+2. chmod +x
+
+
+Purpose:
+Provides execute permission to shell script files.
+
+
+Justification:
+Makes the shell script executable.
+
+
+--------------------------------------------------------------------------------
+
+
+3. ./extract_errors.sh
+
+
+Purpose:
+Executes the log monitoring script.
+
+
+Justification:
+Runs the complete log monitoring process including filtering, reporting, and suppression of unnecessary output.
+
+
+--------------------------------------------------------------------------------
+
+
+4. cat
+
+
+Purpose:
+Displays the contents of a file.
+
+
+Justification:
+Used to display the generated error report for verification.
+
+
+--------------------------------------------------------------------------------
+
+
+5. echo
+
+
+Purpose:
+Prints text on the terminal.
+
+
+Justification:
+Used to display headings and improve the readability of the output.
+
+
+--------------------------------------------------------------------------------
+
+
+Concepts Used
+
+
+Pipes ( | )
+
+
+Purpose:
+Transfers the output of one command directly as the input of another command.
+
+
+Contribution:
+The monitoring tool uses pipes to efficiently connect commands such as tail and grep without creating temporary files.
+
+
+--------------------------------------------------------------------------------
+
+
+tail
+
+
+Purpose:
+Displays the last lines of a file and can continuously monitor newly appended lines using the -f option.
+
+
+Contribution:
+Allows the administrator to monitor new log entries in real time as they are added to the log file.
+
+
+--------------------------------------------------------------------------------
+
+
+grep
+
+
+Purpose:
+Searches for specific patterns within text.
+
+
+Contribution:
+Filters the log file and extracts only lines containing the keyword ERROR, making the monitoring process more efficient.
+
+
+--------------------------------------------------------------------------------
+
+
+Redirection
+
+
+Purpose:
+Redirects command output to files or other destinations.
+
+
+Contribution:
+The extracted ERROR messages are redirected into error_report.txt for future analysis instead of displaying all output on the terminal.
+
+
+--------------------------------------------------------------------------------
+
+
+/dev/null
+
+
+Purpose:
+A special Linux device that discards unwanted output.
+
+
+Contribution:
+Informational log messages are redirected to /dev/null so that only important ERROR messages are displayed, reducing unnecessary terminal output.
+
+
+--------------------------------------------------------------------------------
+
+
+How the Command Pipeline Solves the Problem
+
+
+The monitoring tool continuously watches the log file using tail. The output is passed through a pipe to grep, which filters only ERROR messages. These filtered messages are redirected into error_report.txt while unnecessary output is sent to /dev/null. This pipeline enables real-time monitoring, efficient filtering, reduced terminal clutter, and automatic report generation.
+
+
+--------------------------------------------------------------------------------
+
+
+Theory
+
+
+Linux pipelines allow multiple commands to work together by passing the output of one command directly to another. The tail command monitors files in real time, while grep filters specific patterns from the incoming data stream. Redirection operators store useful output in files and suppress unwanted output by sending it to /dev/null. Combining these features creates an efficient log-monitoring system that processes large log files with minimal resource usage.
+
+
+--------------------------------------------------------------------------------
+
+
+Conclusion
+
+
+The shell script successfully demonstrated real-time log monitoring using Linux command pipelines. It extracted ERROR messages, maintained a separate error report, suppressed unnecessary output using /dev/null, and efficiently utilized pipes, grep, tail, and redirection to improve performance and simplify log analysis.

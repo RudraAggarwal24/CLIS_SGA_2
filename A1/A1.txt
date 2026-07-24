@@ -1,0 +1,243 @@
+﻿Question 1: Duplicate Submission Detection and Backup
+
+
+Aim
+
+
+The objective of this shell script is to identify duplicate assignment submissions, create a backup of only unique submissions, generate a report showing the number of files processed, duplicate files found, and unique files backed up, and store all error messages in a separate log file.
+
+
+--------------------------------------------------------------------------------
+
+
+Problem Statement
+
+
+A university Linux server stores assignment submissions from hundreds of students. The shell script should automatically detect duplicate submissions, back up only unique files, generate a processing report, and maintain a separate error log for any execution errors.
+
+
+--------------------------------------------------------------------------------
+
+
+Command Executed
+
+
+cd /Users/rudra/Downloads/BITS_CLI_SGA2/Q1_Duplicate_Detection && chmod +x *.sh && ./run_demo.sh && echo "-----REPORT-----" && cat report.txt && echo "-----ERRORS-----" && cat errors.log && echo "-----BACKUP-----" && ls -l backup
+
+
+Explanation
+
+
+The command changes the current working directory to the project folder, grants execute permission to all shell scripts, executes the duplicate detection program, displays the generated report and error log, and finally lists the files stored in the backup directory for verification.
+
+
+--------------------------------------------------------------------------------
+
+
+Output Observed
+
+
+• The script processed 7 assignment submission files.
+• Duplicate submissions were detected by comparing the contents of the files.
+• Three duplicate files were identified.
+• Three unique files were copied successfully to the backup directory.
+• A processing report was generated automatically.
+• Error messages caused by inaccessible files were stored separately in errors.log.
+• The backup directory contained only the unique assignment files.
+
+
+--------------------------------------------------------------------------------
+
+
+Report Summary
+
+
+Files Processed : 7
+
+
+Duplicate Files : 3
+
+
+Unique Files Backed Up : 3
+
+
+Errors Logged : 2
+
+
+Explanation
+
+
+The report summarizes the complete execution of the shell script. It shows the total number of processed files, duplicate files detected, unique files backed up, and errors recorded during execution.
+
+
+--------------------------------------------------------------------------------
+
+
+Linux Commands Used
+
+
+1. cd
+
+
+Purpose:
+Changes the current working directory.
+
+
+Justification:
+Used to navigate to the project directory before executing the shell script.
+
+
+--------------------------------------------------------------------------------
+
+
+2. chmod +x
+
+
+Purpose:
+Provides execute permission to shell script files.
+
+
+Justification:
+Makes the shell scripts executable so they can be run directly from the terminal.
+
+
+--------------------------------------------------------------------------------
+
+
+3. ./run_demo.sh
+
+
+Purpose:
+Executes the duplicate detection shell script.
+
+
+Justification:
+Runs the complete process of duplicate detection, backup creation, report generation, and error logging.
+
+
+--------------------------------------------------------------------------------
+
+
+4. echo
+
+
+Purpose:
+Prints messages on the terminal.
+
+
+Justification:
+Used to display headings such as REPORT, ERRORS, and BACKUP, making the output easier to understand.
+
+
+--------------------------------------------------------------------------------
+
+
+5. cat
+
+
+Purpose:
+Displays the contents of a file.
+
+
+Justification:
+Used to display the generated report and error log for verification.
+
+
+--------------------------------------------------------------------------------
+
+
+6. ls -l
+
+
+Purpose:
+Displays detailed information about files.
+
+
+Justification:
+Used to verify that only unique assignment files were successfully copied into the backup directory.
+
+
+--------------------------------------------------------------------------------
+
+
+Redirection Operators Used
+
+
+>
+
+
+Purpose:
+Redirects standard output to a file by overwriting its previous contents.
+
+
+Contribution:
+Used while generating a new processing report.
+
+
+--------------------------------------------------------------------------------
+
+
+>>
+
+
+Purpose:
+Appends output to an existing file.
+
+
+Contribution:
+Used when additional information needs to be added without removing previous contents.
+
+
+--------------------------------------------------------------------------------
+
+
+2>
+
+
+Purpose:
+Redirects standard error messages to a separate file.
+
+
+Contribution:
+Ensures that error messages do not mix with normal program output.
+
+
+--------------------------------------------------------------------------------
+
+
+2>>
+
+
+Purpose:
+Appends standard error messages to the existing error log.
+
+
+Contribution:
+Maintains a complete history of execution errors.
+
+
+--------------------------------------------------------------------------------
+
+
+File Handling Techniques Used
+
+
+The shell script scans every assignment file in the submissions directory, generates a checksum for each file, compares checksums to identify duplicate submissions, copies only unique files into the backup directory, generates a processing report, and stores all execution errors in a separate log file. This approach improves storage efficiency and simplifies file management.
+
+
+--------------------------------------------------------------------------------
+
+
+Theory
+
+
+Shell scripting is used in Linux to automate repetitive system administration tasks. In this solution, duplicate submissions are identified by comparing file contents using checksums. Only unique files are copied to the backup directory, reducing unnecessary storage usage. A processing report provides a summary of all operations performed, while error messages are redirected to a separate log file for easier troubleshooting. The use of Linux commands, redirection operators, and file-handling techniques makes the solution efficient, reliable, and suitable for managing a large number of student submissions.
+
+
+--------------------------------------------------------------------------------
+
+
+Conclusion
+
+
+The shell script successfully identified duplicate assignment submissions, backed up only unique files, generated a detailed processing report, and stored execution errors separately. The solution demonstrates the effective use of Linux commands, redirection operators, and file-handling techniques to automate the management of assignment submissions on a university Linux server.

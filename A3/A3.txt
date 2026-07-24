@@ -1,0 +1,219 @@
+﻿Question 3: Secure File Processing Using Linux System Calls
+
+
+Aim
+
+
+The objective of this program is to implement a secure file-processing utility using Linux system calls instead of standard library functions. The program creates a file, writes employee records, updates a specific record without rewriting the entire file, retrieves records efficiently from any location, and closes the file properly.
+
+
+--------------------------------------------------------------------------------
+
+
+Problem Statement
+
+
+A company requires a secure file-processing utility that uses Linux system calls for efficient file management. The program should create a file, store employee records, update a specific employee record without rewriting the complete file, retrieve records from any location using random access, and release all system resources after execution.
+
+
+--------------------------------------------------------------------------------
+
+
+Command Executed
+
+
+cd /Users/rudra/Downloads/BITS_CLI_SGA2/Q3_File_System_Calls && gcc -Wall -o employee_records employee_records.c && ./employee_records && echo "----FILE----" && ls -l
+
+
+Explanation
+
+
+The command changes the working directory to the project folder, compiles the C program with compiler warnings enabled, executes the program, and finally displays the details of the generated employee data file.
+
+
+--------------------------------------------------------------------------------
+
+
+Output Observed
+
+
+• A new file named employees.dat was successfully created.
+• Four employee records were written to the file.
+• Record number 2 was accessed directly using lseek() and read().
+• Bob's salary was updated from 55000 to 72000 without rewriting the complete file.
+• The updated employee records were displayed successfully.
+• The file descriptor was released using close().
+• The generated file employees.dat was verified using the ls -l command.
+
+
+--------------------------------------------------------------------------------
+
+
+Linux Commands Used
+
+
+1. cd
+
+
+Purpose:
+Changes the current working directory.
+
+
+Justification:
+Used to move to the project folder before compiling and executing the program.
+
+
+--------------------------------------------------------------------------------
+
+
+2. gcc -Wall
+
+
+Purpose:
+Compiles the C source code into an executable program while displaying compiler warnings.
+
+
+Justification:
+Ensures successful compilation and helps detect coding issues through warning messages.
+
+
+--------------------------------------------------------------------------------
+
+
+3. ./employee_records
+
+
+Purpose:
+Executes the compiled C program.
+
+
+Justification:
+Runs the secure file-processing program using Linux system calls.
+
+
+--------------------------------------------------------------------------------
+
+
+4. echo
+
+
+Purpose:
+Displays text messages on the terminal.
+
+
+Justification:
+Used to display headings and improve the readability of the output.
+
+
+--------------------------------------------------------------------------------
+
+
+5. ls -l
+
+
+Purpose:
+Displays detailed information about files.
+
+
+Justification:
+Used to verify that the employee data file was created successfully and to display its size and permissions.
+
+
+--------------------------------------------------------------------------------
+
+
+Linux System Calls Used
+
+
+open()
+
+
+Purpose:
+Creates or opens a file and returns a file descriptor.
+
+
+Contribution:
+The program uses open() to create the employee data file and obtain a file descriptor that is used for all subsequent file operations.
+
+
+--------------------------------------------------------------------------------
+
+
+write()
+
+
+Purpose:
+Writes data to a file.
+
+
+Contribution:
+Employee records are written directly into the file using write(), allowing efficient storage of data.
+
+
+--------------------------------------------------------------------------------
+
+
+read()
+
+
+Purpose:
+Reads data from a file.
+
+
+Contribution:
+The program retrieves employee records from the file and displays them after reading.
+
+
+--------------------------------------------------------------------------------
+
+
+lseek()
+
+
+Purpose:
+Moves the file pointer to a specific location.
+
+
+Contribution:
+The program uses lseek() to directly access a required employee record and update it without rewriting the entire file. This enables efficient random access to records.
+
+
+--------------------------------------------------------------------------------
+
+
+close()
+
+
+Purpose:
+Closes the file descriptor.
+
+
+Contribution:
+After all file operations are completed, close() releases the file descriptor and ensures that all resources are freed properly.
+
+
+--------------------------------------------------------------------------------
+
+
+How the Program Solves the Problem
+
+
+The program first creates the employee data file using open(). It stores employee records using write(). To retrieve a specific record, it moves the file pointer directly to the required location using lseek() and reads the record using read(). When updating an employee's salary, lseek() positions the file pointer to the exact record, allowing write() to overwrite only that record instead of rewriting the complete file. Finally, close() releases the file descriptor after all operations are completed.
+
+
+--------------------------------------------------------------------------------
+
+
+Theory
+
+
+Linux system calls provide direct access to operating system services without relying on standard library functions. The open() system call creates or opens files and returns a file descriptor. The write() system call stores data in the file, while read() retrieves data from it. The lseek() system call moves the file pointer to any position, making random access and in-place updates efficient. The close() system call releases the file descriptor and associated resources after file operations are complete. These system calls provide better control, improved efficiency, and secure file handling in Linux applications.
+
+
+--------------------------------------------------------------------------------
+
+
+Conclusion
+
+
+The program successfully demonstrated secure file processing using Linux system calls. It created a file, stored employee records, retrieved records using random access, updated a specific employee record without rewriting the complete file, and closed the file correctly. The use of open(), read(), write(), lseek(), and close() ensured efficient and secure file management while fulfilling all the requirements of the given problem.

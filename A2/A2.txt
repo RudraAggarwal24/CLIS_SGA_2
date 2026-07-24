@@ -1,0 +1,234 @@
+﻿Question 2: Process Management Using fork(), wait(), and Signals
+
+
+Aim
+
+
+The objective of this C program is to simulate process management in a Linux environment by creating child processes using fork(), monitoring their execution, preventing zombie processes, and terminating unresponsive child processes using appropriate signals. This demonstrates how a web server efficiently manages multiple client requests.
+
+
+--------------------------------------------------------------------------------
+
+
+Problem Statement
+
+
+A web server may become unresponsive when excessive child processes are created or when terminated child processes are not properly cleaned up. This program demonstrates how to create, monitor, and safely terminate child processes while preventing zombie processes.
+
+
+--------------------------------------------------------------------------------
+
+
+Command Executed
+
+
+cd /Users/rudra/Downloads/BITS_CLI_SGA2/Q2_Process_Management && gcc -Wall -o process_manager process_manager.c && echo "Compiled OK" && ./process_manager && echo "-----ZOMBIE CHECK-----" && (ps -v | grep Z || echo "No zombies")
+
+
+Explanation
+
+
+The command changes the working directory to the project folder, compiles the C program with compiler warnings enabled, executes the compiled program, and finally checks whether any zombie processes remain after execution.
+
+
+--------------------------------------------------------------------------------
+
+
+Output Observed
+
+
+• The program compiled successfully.
+• Three child processes were created using fork().
+• Child 1 and Child 2 completed their tasks normally.
+• Child 3 became unresponsive by entering an infinite wait.
+• The parent process continuously monitored all child processes.
+• The unresponsive child process was terminated using SIGTERM.
+• All child processes were reaped successfully.
+• The final zombie process check displayed "No zombies", confirming that no zombie processes remained.
+
+
+--------------------------------------------------------------------------------
+
+
+Linux Commands Used
+
+
+1. cd
+
+
+Purpose:
+Changes the current working directory.
+
+
+Justification:
+Used to move to the project directory before compiling and running the program.
+
+
+--------------------------------------------------------------------------------
+
+
+2. gcc -Wall
+
+
+Purpose:
+Compiles the C source file into an executable program and displays compiler warnings.
+
+
+Justification:
+Ensures successful compilation and helps identify programming issues through warning messages.
+
+
+--------------------------------------------------------------------------------
+
+
+3. ./process_manager
+
+
+Purpose:
+Executes the compiled C program.
+
+
+Justification:
+Runs the process management simulation, including child process creation, monitoring, waiting, and signal handling.
+
+
+--------------------------------------------------------------------------------
+
+
+4. echo
+
+
+Purpose:
+Displays text messages on the terminal.
+
+
+Justification:
+Used to display headings and execution status, making the output easier to understand.
+
+
+--------------------------------------------------------------------------------
+
+
+5. ps
+
+
+Purpose:
+Displays information about currently running processes.
+
+
+Justification:
+Used after program execution to verify that no zombie processes remain.
+
+
+--------------------------------------------------------------------------------
+
+
+6. grep
+
+
+Purpose:
+Searches for a specific pattern.
+
+
+Justification:
+Used with the ps command to search for zombie processes.
+
+
+--------------------------------------------------------------------------------
+
+
+7. ||
+
+
+Purpose:
+Logical OR operator.
+
+
+Justification:
+Prints "No zombies" when no zombie process is found.
+
+
+--------------------------------------------------------------------------------
+
+
+System Calls Used
+
+
+fork()
+
+
+Purpose:
+Creates a new child process.
+
+
+Explanation:
+The parent process creates three child processes using fork(). Each child process executes independently, allowing multiple tasks to run simultaneously.
+
+
+--------------------------------------------------------------------------------
+
+
+wait()
+
+
+Purpose:
+Waits for child processes to terminate and collects their exit status.
+
+
+Explanation:
+The parent process waits for completed child processes and removes them from the process table, preventing zombie processes.
+
+
+--------------------------------------------------------------------------------
+
+
+kill()
+
+
+Purpose:
+Sends a signal to another process.
+
+
+Explanation:
+The parent process sends a termination signal to stop the child process that becomes unresponsive.
+
+
+--------------------------------------------------------------------------------
+
+
+SIGTERM
+
+
+Purpose:
+Gracefully terminates a process.
+
+
+Explanation:
+SIGTERM requests the unresponsive child process to terminate safely, allowing it to release resources before exiting.
+
+
+--------------------------------------------------------------------------------
+
+
+How Process Creation, Waiting, and Signal Handling Work Together
+
+
+The parent process first creates multiple child processes using fork(). It continuously monitors their execution while each child performs its assigned task. As child processes finish, the parent uses wait() to collect their exit status, preventing zombie processes from remaining in the process table. If a child process becomes unresponsive, the parent detects the problem and sends a SIGTERM signal to terminate it gracefully. Together, process creation, waiting, and signal handling ensure efficient process management, proper resource utilization, and reliable server performance.
+
+
+--------------------------------------------------------------------------------
+
+
+Theory
+
+
+In Linux, a process is an executing instance of a program. The fork() system call creates child processes that execute independently of the parent. The wait() system call allows the parent to collect the termination status of child processes, preventing zombie processes from accumulating. Signal handling enables one process to communicate with another by sending signals such as SIGTERM to request graceful termination. Combining these mechanisms allows Linux to manage multiple processes efficiently while maintaining system stability.
+
+
+--------------------------------------------------------------------------------
+
+
+Conclusion
+
+
+The program successfully demonstrated Linux process management using fork(), wait(), and signal handling. It created child processes, monitored their execution, prevented zombie processes by collecting their exit status, and terminated an unresponsive child process using SIGTERM. The final zombie process check confirmed that no zombie processes remained, showing that the program effectively manages child processes in a web server environment.

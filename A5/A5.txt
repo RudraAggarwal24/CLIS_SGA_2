@@ -1,0 +1,225 @@
+﻿Question 5: Recovery Mechanisms in vi Editor
+
+
+Aim
+
+
+The objective of this experiment is to evaluate the recovery mechanisms available in the vi editor after a system crash and determine the most reliable method for recovering unsaved changes in a critical configuration file.
+
+
+--------------------------------------------------------------------------------
+
+
+Problem Statement
+
+
+A software developer is editing a critical configuration file using the vi editor. Before the file is saved, the system crashes unexpectedly. The task is to evaluate the available recovery mechanisms in vi and recommend the most reliable recovery strategy.
+
+
+--------------------------------------------------------------------------------
+
+
+Command Executed
+
+
+cd /Users/rudra/Downloads/BITS_CLI_SGA2/Q5_Vi_Recovery && chmod +x *.sh && ./simulate_crash.sh
+
+
+Explanation
+
+
+The command changes the current working directory to the project folder, grants execute permission to all shell scripts, and executes the simulation script. The script intentionally crashes the vi editor, demonstrates swap file recovery, and restores the unsaved changes successfully.
+
+
+--------------------------------------------------------------------------------
+
+
+Output Observed
+
+
+• The vi editor was intentionally terminated using the kill -9 signal to simulate a system crash.
+• A swap file (.app.conf.swp) remained after the crash.
+• The original configuration file did not contain the unsaved changes.
+• The recovery process was started using "vim -r app.conf".
+• Vim successfully recovered the unsaved data from the swap file.
+• A new recovered file named recovered_app.conf was created.
+• The recovered file contained the missing CRASH_TEST=recovered entry, proving that the unsaved changes were restored successfully.
+
+
+--------------------------------------------------------------------------------
+
+
+Linux Commands Used
+
+
+1. cd
+
+
+Purpose:
+Changes the current working directory.
+
+
+Justification:
+Used to navigate to the project folder before running the recovery demonstration.
+
+
+--------------------------------------------------------------------------------
+
+
+2. chmod +x
+
+
+Purpose:
+Provides execute permission to the shell script.
+
+
+Justification:
+Allows the recovery simulation script to be executed directly.
+
+
+--------------------------------------------------------------------------------
+
+
+3. ./simulate_crash.sh
+
+
+Purpose:
+Executes the recovery demonstration.
+
+
+Justification:
+Simulates a crash while editing a file and demonstrates recovery using Vim.
+
+
+--------------------------------------------------------------------------------
+
+
+4. kill -9
+
+
+Purpose:
+Immediately terminates a running process.
+
+
+Justification:
+Used to simulate an unexpected system crash while editing the configuration file.
+
+
+--------------------------------------------------------------------------------
+
+
+5. vim -r app.conf
+
+
+Purpose:
+Recovers the file from the existing swap file.
+
+
+Justification:
+Restores unsaved changes that were preserved in the swap file after the crash.
+
+
+--------------------------------------------------------------------------------
+
+
+Recovery Mechanisms in vi
+
+
+1. Swap Files (.swp)
+
+
+Purpose:
+Swap files automatically store temporary editing information.
+
+
+Contribution:
+After the crash, the swap file (.app.conf.swp) preserved the unsaved changes and enabled successful recovery using vim -r.
+
+
+--------------------------------------------------------------------------------
+
+
+2. Undo History
+
+
+Purpose:
+Allows previously performed editing operations to be reversed.
+
+
+Contribution:
+Undo is useful only during the current editing session. After an unexpected crash, the undo history is generally unavailable unless recovery is performed first.
+
+
+--------------------------------------------------------------------------------
+
+
+3. Registers
+
+
+Purpose:
+Registers temporarily store copied, deleted, and yanked text.
+
+
+Contribution:
+Registers help recover copied or deleted text during editing but usually cannot recover data after a crash.
+
+
+--------------------------------------------------------------------------------
+
+
+4. Backup Files
+
+
+Purpose:
+Backup files store the last successfully saved version of a file.
+
+
+Contribution:
+Backup files protect previously saved data but do not contain the most recent unsaved changes.
+
+
+--------------------------------------------------------------------------------
+
+
+5. Auto-Recovery
+
+
+Purpose:
+Automatically detects an existing swap file and starts the recovery process.
+
+
+Contribution:
+The vi editor successfully recovered the missing configuration line from the swap file and restored the file after the crash.
+
+
+--------------------------------------------------------------------------------
+
+
+Most Reliable Recovery Strategy
+
+
+The most reliable recovery strategy is to use the automatically generated swap file together with Vim's recovery feature (vim -r filename).
+
+
+Justification
+
+
+The swap file continuously stores recent editing changes while the file is open. After an unexpected crash, Vim detects the swap file and restores the latest unsaved modifications. Backup files provide additional protection for previously saved versions, but they cannot recover recent unsaved edits. Therefore, the combination of swap files and Vim's auto-recovery mechanism provides the most reliable protection against data loss.
+
+
+--------------------------------------------------------------------------------
+
+
+Theory
+
+
+The vi editor includes several built-in recovery mechanisms to minimize data loss during unexpected failures. Swap files preserve temporary editing information, backup files store previously saved versions, registers temporarily hold copied and deleted text, and undo history allows recent changes to be reversed during the active editing session. When a crash occurs, Vim automatically detects the swap file and allows the user to recover unsaved changes using the recovery command. These mechanisms provide reliable protection for important configuration files and improve overall editing safety.
+
+
+--------------------------------------------------------------------------------
+
+
+Conclusion
+
+
+The experiment successfully demonstrated vi recovery after a simulated system crash. The swap file preserved the unsaved changes, and the recovery command restored the missing configuration entry successfully. Among all available recovery mechanisms, swap files together with Vim's auto-recovery provide the most reliable solution because they recover the latest unsaved work while backup files preserve previously saved versions.
